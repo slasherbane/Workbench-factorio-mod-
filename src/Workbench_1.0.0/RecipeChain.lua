@@ -56,7 +56,8 @@ function RecipeChain.remove(recipe)
         return
     end
 
-  return table.remove(self.recipes,recipe.index)
+
+    return Utils:removeAndReindex(self.recipes,recipe.index)
 end
 
 function RecipeChain.processChain(workbench)

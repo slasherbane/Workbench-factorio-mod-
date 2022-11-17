@@ -10,9 +10,9 @@ local Table = require('__stdlib__/stdlib/utils/table')
 function Main()
 
 
-  local workbenches  = global.Workable() or {}
+    local workbenches  = global.Workable or {}
     -- all chains and chain per player. All player can only have one chain at a time
-  local chains = global.Chains or {}
+    local chains = global.Chains or {}
 
     if(Is.Nil(chains) or Table.is_empty(chains))then
         for _, p in pairs(game.players) do
@@ -20,7 +20,20 @@ function Main()
         end
     end
 
+    if(not Is.Nil(chains) and not Table.is_empty(chains))then
+        local hasChain = false
+        for _, p in pairs(game.players) do
 
+            for _, chain in pairs(global.Chains) do
+                if(chain.owner == p)then
+                    hasChain = true
+                end
+            end
 
+            if not hasChain then
+                table.insert(global.Chains,RecipeChain:new(nil,p))
+            end
+        end
+    end
 
 end

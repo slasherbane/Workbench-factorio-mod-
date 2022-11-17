@@ -12,7 +12,8 @@ WorkBench = {
     deploy = false,
     actualRecipe = nil,
     status = "empty" ,--empty , crafting ,error , requested , pending
-    standardAmount = 40
+    standardAmount = 40,
+    index = nil
 }
 WorkBench.__index = WorkBench
 
