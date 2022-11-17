@@ -19,8 +19,8 @@ WorkBench.__index = WorkBench
 
 function WorkBench:new(assembler)
 
-    if Is.Nil(assembler) then
-        log("No assembler")
+    if Is.Nil(assembler) or not assembler.valid or not (assembler.prototype.type == "AssemblingMachine") then
+        log("No valid assembler")
         return
     end
 
@@ -42,11 +42,13 @@ function Workbench.setRecipe(recipe,force)
     self.clearRecipe()
     self.actualRecipe = recipe
     self.status = "crafting"
+    self.luaEntity.setRecipe(recipe.luaEntity)
 end
 
 function WorkBench.clearRecipe()
     self.actualRecipe = nil
     self.status = "empty"
+    self.luaEntity.setRecipe(nil)
 end
 
 
@@ -80,6 +82,9 @@ function WorkBench.skipRecipe(time)
 end
 
 -- process the time in game for chest and entity an recipe
-function WorkBench.process()
+function WorkBench.process(chestNetwork)
 
+    if(not Is.Nil(self.actualRecipe) and not Is.Nil(self.luaEntity))then
+        -- self.luaEntity.
+    end
 end
