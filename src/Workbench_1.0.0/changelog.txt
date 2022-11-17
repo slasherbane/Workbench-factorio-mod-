@@ -1,0 +1,6 @@
+
+Version: 0.0.6
+Date: 6.6.2016
+
+  Features:
+    - Initial release
