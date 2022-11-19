@@ -14,8 +14,9 @@ WorkBenchDeploy = {
 function WorkBenchDeploy:new()
     local self = {}
     setmetatable(self,WorkBenchDeploy)
-   -- local workbench = WorkBench:new(assembler)
-    --table.insert(self.workbenches,workbench)
+    if(self.alreadyExistWorkbench)then
+        return nil
+    end
 
 
     return self
@@ -27,6 +28,19 @@ function WorkBenchDeploy:deploy(assembler)
     local workbench = WorkBench:new(assembler)
 table.insert(self.workbenches,workbench)
     return  workbench
+end
+
+function WorkBenchDeploy:alreadyExistWorkbench(assembler)
+    for _, w in pairs(global.Workable) do
+
+        local positionWork = w.luaEntity.position
+        local positionAssemb = assembler.position
+        if  (positionWork.x == positionAssemb.x) and (positionWork.y == positionAssemb.luaEntity) and w.luaEntity.name == assembler.name then
+            return true
+        end
+    end
+
+    return false
 end
 
 function WorkBenchDeploy:destroy(workbench)
